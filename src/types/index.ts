@@ -29,3 +29,18 @@ export type ValidationResult = {
     phone?: "Не указан номер телефона";
     address?: "Не указан адрес для доставки";
 }
+
+export type ItemsListResponse = {
+  total: number;
+  items: IProduct[];
+}
+
+export type OrderBody = IBuyer &  {
+  total: number;
+  items: string[];
+}
+
+export type OrderResponse = {
+  id: string;
+  total: number;
+}
