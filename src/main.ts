@@ -10,6 +10,7 @@ import { cloneTemplate, ensureElement } from './utils/utils.ts';
 import { CardCatalog } from './components/View/CardCatalog.ts';
 import { CardBasket } from './components/View/CardBasket.ts';
 import { CardPreview } from './components/View/CardPreview.ts';
+import { Modal } from './components/View/Modal.ts';
 
 // // Каталог
 // const catalogModel = new Catalog();
@@ -132,3 +133,8 @@ const testPCard = cloneTemplate('#card-preview')
 const cardP = new CardPreview(testPCard, { onClick: () => console.log("click")})
 const cardPElement = cardP.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category, text: tProduct.description})
 gallery.appendChild(cardPElement)
+
+const modalEl = ensureElement('#modal-container')
+const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
+testModal.render({ content: cardPElement })
+testModal.openModal()
