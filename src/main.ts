@@ -14,6 +14,9 @@ import { Modal } from './components/View/Modal.ts';
 import { Header } from './components/View/Header.ts';
 import { Gallery } from './components/View/Gallery.ts';
 import { BasketModal } from './components/View/BasketModal.ts';
+import { OrderForm } from './components/View/OrderForm.ts';
+import { ContactsForm } from './components/View/ContactsForm.ts';
+import { Success } from './components/View/Success.ts';
 
 // // Каталог
 // const catalogModel = new Catalog();
