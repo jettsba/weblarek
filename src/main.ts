@@ -11,6 +11,7 @@ import { CardCatalog } from './components/View/CardCatalog.ts';
 import { CardBasket } from './components/View/CardBasket.ts';
 import { CardPreview } from './components/View/CardPreview.ts';
 import { Modal } from './components/View/Modal.ts';
+import { Header } from './components/View/Header.ts';
 
 // // Каталог
 // const catalogModel = new Catalog();
@@ -137,4 +138,7 @@ gallery.appendChild(cardPElement)
 const modalEl = ensureElement('#modal-container')
 const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
 testModal.render({ content: cardPElement })
-testModal.openModal()
+
+const headerEl = ensureElement(".header")
+const headerTest = new Header(headerEl, { onBasketClick: () => console.log("basket clicked!")})
+headerTest.render({ counter: 5 })
