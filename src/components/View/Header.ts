@@ -1,11 +1,11 @@
 import { Component } from "../base/Component";
 import { ensureElement } from "../../utils/utils";
 
-type HeaderBasket = {
+type HeaderType = {
     counter: number
 }
 
-export class Header extends Component<HeaderBasket> {
+export class Header extends Component<HeaderType> {
     protected basketButtonElement: HTMLElement;
     protected basketCounterElement: HTMLElement;
     

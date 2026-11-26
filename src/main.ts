@@ -12,6 +12,7 @@ import { CardBasket } from './components/View/CardBasket.ts';
 import { CardPreview } from './components/View/CardPreview.ts';
 import { Modal } from './components/View/Modal.ts';
 import { Header } from './components/View/Header.ts';
+import { Gallery } from './components/View/Gallery.ts';
 
 // // Каталог
 // const catalogModel = new Catalog();
@@ -116,29 +117,45 @@ import { Header } from './components/View/Header.ts';
 //         console.log(`Ошибка: ${err}`);
 //     });
 
+//////////////////////////////////
+
+
+// const testPCard = cloneTemplate('#card-preview')
+// const cardP = new CardPreview(testPCard, { onClick: () => console.log("click")})
+// const cardPElement = cardP.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category, text: tProduct.description})
+// gallery.appendChild(cardPElement)
+
+// const modalEl = ensureElement('#modal-container')
+// const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
+// testModal.render({ content: cardPElement })
+
+// const testBCard = cloneTemplate('#card-basket')
+// const cardB = new CardBasket(testBCard, { onClick: () => console.log("click")})
+// const cardBElement = cardB.render({title: tProduct.title, price: tProduct.price})
+// gallery.appendChild(cardBElement)
+
+// const testCard = cloneTemplate('#card-catalog')
+// const card = new CardCatalog(testCard, { onClick: () => console.log("click")})
+// const cardElement = card.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category})
+// gallery.replaceChildren(cardElement)
 
 const gallery = ensureElement('.gallery')
-const tProduct = apiProducts.items[0]
-
-const testCard = cloneTemplate('#card-catalog')
-const card = new CardCatalog(testCard, { onClick: () => console.log("click")})
-const cardElement = card.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category})
-gallery.replaceChildren(cardElement)
-
-const testBCard = cloneTemplate('#card-basket')
-const cardB = new CardBasket(testBCard, { onClick: () => console.log("click")})
-const cardBElement = cardB.render({title: tProduct.title, price: tProduct.price})
-gallery.appendChild(cardBElement)
-
-const testPCard = cloneTemplate('#card-preview')
-const cardP = new CardPreview(testPCard, { onClick: () => console.log("click")})
-const cardPElement = cardP.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category, text: tProduct.description})
-gallery.appendChild(cardPElement)
-
-const modalEl = ensureElement('#modal-container')
-const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
-testModal.render({ content: cardPElement })
+const tProduct0 = apiProducts.items[0]
+const tProduct1 = apiProducts.items[1]
+const tProduct2 = apiProducts.items[2]
+const tProduct3 = apiProducts.items[3]
+const tProductsArray = [tProduct0, tProduct1, tProduct2, tProduct3]
+const tProducts = tProductsArray.map((item) => {
+    const {title, price, image, category} = item
+    const template = cloneTemplate('#card-catalog')
+    const card = new CardCatalog(template, { onClick: () => console.log("клик по карточке!")})
+    const cardElement = card.render({title, price, image, category})
+    return cardElement
+})
 
 const headerEl = ensureElement(".header")
 const headerTest = new Header(headerEl, { onBasketClick: () => console.log("basket clicked!")})
 headerTest.render({ counter: 5 })
+
+const galleryTest = new Gallery(gallery)
+galleryTest.render({ cardList: tProducts })
