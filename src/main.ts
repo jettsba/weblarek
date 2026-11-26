@@ -13,6 +13,7 @@ import { CardPreview } from './components/View/CardPreview.ts';
 import { Modal } from './components/View/Modal.ts';
 import { Header } from './components/View/Header.ts';
 import { Gallery } from './components/View/Gallery.ts';
+import { BasketModal } from './components/View/BasketModal.ts';
 
 // // Каталог
 // const catalogModel = new Catalog();
@@ -125,9 +126,7 @@ import { Gallery } from './components/View/Gallery.ts';
 // const cardPElement = cardP.render({title: tProduct.title, price: tProduct.price, image: tProduct.image, category: tProduct.category, text: tProduct.description})
 // gallery.appendChild(cardPElement)
 
-// const modalEl = ensureElement('#modal-container')
-// const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
-// testModal.render({ content: cardPElement })
+
 
 // const testBCard = cloneTemplate('#card-basket')
 // const cardB = new CardBasket(testBCard, { onClick: () => console.log("click")})
@@ -140,6 +139,7 @@ import { Gallery } from './components/View/Gallery.ts';
 // gallery.replaceChildren(cardElement)
 
 const gallery = ensureElement('.gallery')
+const basketTest = cloneTemplate('#basket')
 const tProduct0 = apiProducts.items[0]
 const tProduct1 = apiProducts.items[1]
 const tProduct2 = apiProducts.items[2]
@@ -153,9 +153,25 @@ const tProducts = tProductsArray.map((item) => {
     return cardElement
 })
 
+const tProductsBasket = tProductsArray.map((item, i) => {
+    const {title, price} = item
+    const template = cloneTemplate('#card-basket')
+    const card = new CardBasket(template, { onClick: () => console.log("позиция удалена из корзины! (или нет)")})
+    const cardElement = card.render({title, price, index: i + 1 })
+    return cardElement
+})
+
 const headerEl = ensureElement(".header")
 const headerTest = new Header(headerEl, { onBasketClick: () => console.log("basket clicked!")})
 headerTest.render({ counter: 5 })
 
 const galleryTest = new Gallery(gallery)
 galleryTest.render({ cardList: tProducts })
+
+const basketEl = new BasketModal(basketTest, { onConfirmClick: () => console.log("confirm in basket clicked!") })
+const basketTest1 = basketEl.render({ basketList: tProductsBasket, totalPrice: 99999 })
+
+const modalEl = ensureElement('#modal-container')
+const testModal = new Modal(modalEl, { onClose: () => { testModal.closeModal() } })
+testModal.render({ content: basketTest1 })
+testModal.openModal()

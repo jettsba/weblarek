@@ -2,8 +2,7 @@ import { ensureElement } from "../../utils/utils";
 import { Card, CardType } from "./Card";
 
 export type CardBasketType = CardType & {
-    image: string;
-    category: string;
+    index: number;
 }
 
 export class CardBasket extends Card<CardBasketType>{
